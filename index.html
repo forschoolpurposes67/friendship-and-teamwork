@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Journey of Friendship & Teamwork ࣪ ִֶָ☾.</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#ffffff;
+      --muted:#98a0ad;
+      --accent:#ff5a97;
+      --glass: rgba(255,255,255,0.06);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Arial;}
+    body{background:linear-gradient(180deg,#0b1220 0%,#0f1724 60%);color:#e6eef8;line-height:1.6;-webkit-font-smoothing:antialiased;}
+
+    .wrap{max-width:1100px;margin:48px auto;padding:0 24px;}
+
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:18px 0}
+    .brand{display:flex;gap:14px;align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:12px;
+      background:linear-gradient(135deg,var(--accent),#ff947a);
+      display:flex;align-items:center;justify-content:center;
+      font-family:'Fredoka One';color:#0b1220;font-size:18px;
+      box-shadow:0 8px 30px rgba(255,90,151,0.12)
+    }
+    .site-title{font-family:'Fredoka One';font-size:18px;color:#fff}
+    .nav-links{display:flex;gap:16px;align-items:center}
+    .nav-links a{color:var(--muted);text-decoration:none;font-size:14px}
+
+    .hero{min-height:66vh;display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center}
+    .hero-card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02));
+      border-radius:20px;padding:34px;backdrop-filter:blur(8px);
+      box-shadow:0 20px 60px rgba(2,6,23,0.6)
+    }
+    .eyebrow{font-size:13px;color:var(--accent);font-weight:600;letter-spacing:0.8px}
+    h1{font-family:'Fredoka One';font-size:42px;margin:12px 0;color:#fff}
+    .lead{color:#d2d9e3;font-size:16px}
+    .cta{
+      display:inline-block;margin-top:18px;padding:12px 18px;
+      border-radius:12px;background:linear-gradient(90deg,var(--accent),#ff7faa);
+      color:#081024;font-weight:700;text-decoration:none;
+      box-shadow:0 12px 30px rgba(255,90,151,0.16)
+    }
+
+    .visual{
+      border-radius:16px;overflow:hidden;
+      background:linear-gradient(180deg,#0b1220,#071020);
+      padding:18px;border:1px solid rgba(255,255,255,0.03)
+    }
+    .mock{
+      height:340px;background:linear-gradient(180deg,#09101a,#07101a);
+      border-radius:12px;display:flex;align-items:center;justify-content:center;flex-direction:column;
+      position:relative; overflow:hidden;
+    }
+    .mock img{width:86%;border-radius:10px;box-shadow:0 14px 40px rgba(2,8,22,0.6)}
+
+    .picDesc{
+      position:absolute; bottom:0; left:0; width:100%;
+      background: rgba(0,0,0,0.6);
+      color:#fff;
+      font-size:12px;
+      padding:4px;
+      text-align:center;
+      border-bottom-left-radius:8px;
+      border-bottom-right-radius:8px;
+      opacity:0;
+      transition:0.3s;
+      font: 'Fredoka One';
+    }
+    .mock:hover .picDesc,
+    .gallery-item:hover .picDesc{
+      opacity:1;
+    }
+
+    .timeline{margin-top:34px}
+    .t-item{
+      display:flex;gap:22px;align-items:flex-start;
+      padding:20px 18px;border-radius:14px;
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+      border:1px solid rgba(255,255,255,0.02);margin-bottom:16px
+    }
+    .t-dot{width:12px;height:12px;border-radius:50%;background:var(--accent);margin-top:8px}
+    .t-content h3{margin:0 0 8px 0;font-size:18px;color:#fff}
+    .t-content p{margin:0;color:var(--muted);font-size:14px}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;margin-top:28px}
+    .card{
+      background:linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01));
+      padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);
+      transition:transform .28s,box-shadow .28s
+    }
+    .card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(2,6,23,0.55)}
+    .card h4{margin:0 0 8px 0;color:#fff}
+    .role{font-size:13px;color:var(--muted)}
+
+    .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+    .gallery-item{position:relative; overflow:hidden;}
+    .gallery img{width:100%;height:140px;object-fit:cover;border-radius:10px;border:1px solid rgba(255,255,255,0.03)}
+
+    footer{padding:30px 0;text-align:center;color:var(--muted);font-size:13px}
+
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;gap:18px}
+      .visual{order:-1}
+      .gallery{grid-template-columns:repeat(2,1fr)}
+    }
+    @media (max-width:520px){
+      h1{font-size:28px}
+      .mock{height:220px}
+      .gallery img{height:120px}
+    }
+
+    .particles{position:fixed;inset:0;pointer-events:none;z-index:-1}
+    .p1,.p2,.p3{position:absolute;border-radius:50%;filter:blur(28px);opacity:.12}
+    .p1{width:360px;height:360px;background:linear-gradient(90deg,var(--accent),#ff947a);left:-80px;top:40px}
+    .p2{width:260px;height:260px;background:linear-gradient(90deg,#7ad6ff,#bfe9ff);right:-60px;bottom:30px}
+    .p3{width:160px;height:160px;background:linear-gradient(90deg,#ffd7ea,#ffc6d3);left:40%;top:10%}
+
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.show{opacity:1;transform:none}
+  </style>
+</head>
+<body>
+
+  <div class="particles" aria-hidden>
+    <div class="p1"></div>
+    <div class="p2"></div>
+    <div class="p3"></div>
+  </div>
+
+  <div class="wrap">
+
+    <nav class="nav">
+      <div class="brand">
+        <div class="logo"> ★ </div>
+        <div>
+          <div class="site-title">Story of ;; </div>
+          <div class="sub-title">Friendship ✦ Teamwork ✦ Growth</div>
+        </div>
+      </div>
+      <div class="nav-links">
+        <a href="#story">Story</a>
+        <a href="#team">Skills</a>
+        <a href="#gallery">Gallery</a>
+      </div>
+    </nav>
+
+    <header class="hero">
+      <div class="hero-card reveal js-hero">
+        <div class="eyebrow">My Personal Journey — Reflections & Growth ˎˊ˗</div>
+        <h1>My Journey of Friendship &amp; Teamwork</h1>
+        <p class="lead">
+          From forming new friendships to learning the value of collaboration and support, this webpage documents experiences from various projects and subjects, highlighting meaningful moments and personal growth along the way.
+        </p>
+      </div>
+
+      <aside class="visual reveal js-visual">
+        <div class="mock">
+          <img src="/images/snapshot.jpg" alt="project snapshot">
+          <div class="picDesc">Snapshot on our first journey in 1st Quarter ! (✿◠‿◠) </div>
+        </div>
+      </aside>
+    </header>
+
+    <section id="story" class="reveal js-section">
+      <h2 class="section-title">Timeline — Experiences & Reflections (✿◠‿◠) </h2>
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>New Beginnings ༉‧₊˚. </h3>
+            <p>The school year started with unexpected seat changes, creating small surprises. I found myself adjusting to new arrangements while reconnecting with my friends like Emirah and Zoey.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Ი𐑼 Forming New Friendships</h3>
+            <p>Dean, a student I hadn’t interacted with much before, became part of my study circle. Initiating conversations led to new connections, teaching me openness can build meaningful relationships.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Collaborative Learning ´ཀ`</h3>
+            <p>Even on individual projects, Emirah, Dean, DJ, and I shared ideas, held study calls, and supported each other. Collaboration enhanced understanding and built trust, making learning more engaging.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Academic Growth & Study Habits ⸝⸝</h3>
+            <p>By tutoring my friends in math and exchanging resources, I improved both my knowledge and teaching abilities. Study calls became a key part of our progress and mutual trust within one another.</p>
+          </div>
+        </div>
+        <div class="t-item">
+          <div class="t-dot"></div>
+          <div class="t-content">
+            <h3>Reflections & Memories</h3>
+            <p>Though it’s only the second quarter, our ongoing support and shared experiences created many lasting memories, reinforcing that friendship and teamwork extend beyond formal group projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="reveal js-section">
+      <h2 class="section-title">Personal Growth & Skills Earned</h2>
+      <div class="grid">
+        <div class="card">
+          <h4>Collaboration & Support</h4>
+          <div class="role">Maintained strong connections with friends, participated in study calls, and provided academic support across multiple subjects.</div>
+        </div>
+        <div class="card">
+          <h4>Research & Organization</h4>
+          <div class="role">Compiled resources, organized content, and structured learning materials for projects and self-study.</div>
+        </div>
+        <div class="card">
+          <h4>Creativity & Problem Solving</h4>
+          <div class="role">Developed innovative ways to present information and overcome challenges, ensuring tasks were clear and engaging.</div>
+        </div>
+        <div class="card">
+          <h4>Time Management</h4>
+          <div class="role">Balanced multiple assignments, personal learning, and collaborative study sessions efficiently.</div>
+        </div>
+        <div class="card">
+          <h4>Reflection & Growth</h4>
+          <div class="role">Learned from experiences, embracing challenges and valuing teamwork, communication, and self-improvement.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="reveal js-section">
+      <h2 class="section-title">Memory Gallery</h2>
+      <p class="lead">A snapshot of experiences and moments shared during the school year so far.</p>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="/images/a0ddf796-215b-4975-87bc-dfa713dc7418.jpg" alt="photo1">
+          <div class="picDesc">Friendship bonding while doing an activity◝(ᵔᗜᵔ)◜ </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/study.PNG" alt="photo2">
+          <div class="picDesc">Study calls with Emirah and Dean !! ( ˶°ㅁ°) !! </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/faeoihfawnaw9gnawg.jpg" alt="photo3">
+          <div class="picDesc">⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔</div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/5da1843b-1f55-4ab4-8d01-93af47b5153f.jpg" alt="photo4">
+          <div class="picDesc">In the class, doing mscs tasks together ʚଓ</div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/9d2df020-8f43-4156-afdf-ec414ccfb203.jpg" alt="photo5">
+          <div class="picDesc">Placed 1st place in kahoot w teamwork ⋆˙⟡ </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/images/da9e6d64-aa50-4674-a2b9-34b572d7dce6.jpg" alt="photo6">
+          <div class="picDesc">Teamwork in action !</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>Prepared by Caelyn Nelle A. Papa ──★ ˙🍓 ̟!! </footer>
+  </div>
+
+  <script>
+  const reveals = document.querySelectorAll('.reveal');
+
+  function showReveals() {
+    const trigger = window.innerHeight * 0.85;
+    reveals.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < trigger) el.classList.add('show');
+    });
+  }
+
+  window.addEventListener('scroll', showReveals);
+  window.addEventListener('load', () => {
+    document.querySelectorAll('.js-hero,.js-visual,.js-section,.js-cta').forEach(e => e.classList.add('show'));
+    showReveals();
+    window.scrollTo(0, 0);
+  });
+</script>
+
+</body>
+</html>
