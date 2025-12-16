@@ -127,6 +127,61 @@
 
     .reveal{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
     .reveal.show{opacity:1;transform:none}
+
+      #audio-dot {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 20px;
+    height: 20px;
+    background: var(--accent);
+    border-radius: 50%;
+    cursor: pointer;
+    animation: pulse 2.5s infinite;
+    z-index: 999;
+    box-shadow: 0 0 5px var(--accent);
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 5px var(--accent); }
+    50% { transform: scale(1.4); box-shadow: 0 0 20px var(--accent); }
+    100% { transform: scale(1); box-shadow: 0 0 5px var(--accent); }
+  }
+
+  #audio-dot.playing {
+    animation: pulse 0.8s infinite;
+    box-shadow: 0 0 25px var(--accent), 0 0 50px var(--accent);
+  }
+
+.side-shape {
+  position: fixed;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.25;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.side-shape.left {
+  left: 20px;
+  top: 20%;
+  background: linear-gradient(135deg, #ff5a97, #ff947a);
+}
+
+.side-shape.right {
+  right: 20px;
+  top: 50%;
+  background: linear-gradient(135deg, #7ad6ff, #bfe9ff);
+}
+
+.side-shape.extra {
+  left: 50%;
+  top: 15%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #ffd7ea, #ffc6d3);
+}
+
   </style>
 </head>
 <body>
@@ -136,6 +191,10 @@
     <div class="p2"></div>
     <div class="p3"></div>
   </div>
+
+  <div class="side-shape left"></div>
+  <div class="side-shape right"></div>
+  <div class="side-shape extra"></div>
 
   <div class="wrap">
 
@@ -165,14 +224,14 @@
 
       <aside class="visual reveal js-visual">
         <div class="mock">
-          <img src="/images/snapshot.jpg" alt="project snapshot">
+          <img src="images/snapshot.jpg" alt="project snapshot">
           <div class="picDesc">Snapshot on our first journey in 1st Quarter ! (✿◠‿◠) </div>
         </div>
       </aside>
     </header>
 
     <section id="story" class="reveal js-section">
-      <h2 class="section-title">Timeline — Experiences & Reflections (✿◠‿◠) </h2>
+      <h2 class="section-title">Experiences & Reflections (✿◠‿◠) </h2>
       <div class="timeline">
         <div class="t-item">
           <div class="t-dot"></div>
@@ -243,27 +302,27 @@
       <p class="lead">A snapshot of experiences and moments shared during the school year so far.</p>
       <div class="gallery">
         <div class="gallery-item">
-          <img src="/images/a0ddf796-215b-4975-87bc-dfa713dc7418.jpg" alt="photo1">
+          <img src="images/a0ddf796-215b-4975-87bc-dfa713dc7418.jpg" alt="photo1">
           <div class="picDesc">Friendship bonding while doing an activity◝(ᵔᗜᵔ)◜ </div>
         </div>
         <div class="gallery-item">
-          <img src="/images/study.PNG" alt="photo2">
+          <img src="images/study.png" alt="photo2">
           <div class="picDesc">Study calls with Emirah and Dean !! ( ˶°ㅁ°) !! </div>
         </div>
         <div class="gallery-item">
-          <img src="/images/faeoihfawnaw9gnawg.jpg" alt="photo3">
+          <img src="images/faeoihfawnaw9gnawg.jpg" alt="photo3">
           <div class="picDesc">⏔⏔⏔ ꒰ ᧔ෆ᧓ ꒱ ⏔⏔⏔</div>
         </div>
         <div class="gallery-item">
-          <img src="/images/5da1843b-1f55-4ab4-8d01-93af47b5153f.jpg" alt="photo4">
+          <img src="images/5da1843b-1f55-4ab4-8d01-93af47b5153f.jpg" alt="photo4">
           <div class="picDesc">In the class, doing mscs tasks together ʚଓ</div>
         </div>
         <div class="gallery-item">
-          <img src="/images/9d2df020-8f43-4156-afdf-ec414ccfb203.jpg" alt="photo5">
+          <img src="images/9d2df020-8f43-4156-afdf-ec414ccfb203.jpg" alt="photo5">
           <div class="picDesc">Placed 1st place in kahoot w teamwork ⋆˙⟡ </div>
         </div>
         <div class="gallery-item">
-          <img src="/images/da9e6d64-aa50-4674-a2b9-34b572d7dce6.jpg" alt="photo6">
+          <img src="images/da9e6d64-aa50-4674-a2b9-34b572d7dce6.jpg" alt="photo6">
           <div class="picDesc">Teamwork in action !</div>
         </div>
       </div>
@@ -272,24 +331,65 @@
     <footer>Prepared by Caelyn Nelle A. Papa ──★ ˙🍓 ̟!! </footer>
   </div>
 
+  <div id="audio-dot" title="Click to play music"></div>
+<audio id="bg-music" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
   <script>
-  const reveals = document.querySelectorAll('.reveal');
+    const reveals = document.querySelectorAll('.reveal');
 
-  function showReveals() {
-    const trigger = window.innerHeight * 0.85;
-    reveals.forEach(el => {
-      const top = el.getBoundingClientRect().top;
-      if (top < trigger) el.classList.add('show');
+    function showReveals() {
+      const trigger = window.innerHeight * 0.85;
+      reveals.forEach(el => {
+        const top = el.getBoundingClientRect().top;
+        if (top < trigger) el.classList.add('show');
+      });
+    }
+
+    window.addEventListener('scroll', showReveals);
+    window.addEventListener('load', () => {
+      document.querySelectorAll('.js-hero,.js-visual,.js-section,.js-cta').forEach(e => e.classList.add('show'));
+      showReveals();
+      window.scrollTo(0, 0);
     });
-  }
 
-  window.addEventListener('scroll', showReveals);
-  window.addEventListener('load', () => {
-    document.querySelectorAll('.js-hero,.js-visual,.js-section,.js-cta').forEach(e => e.classList.add('show'));
-    showReveals();
-    window.scrollTo(0, 0);
+      const audioDot = document.getElementById('audio-dot');
+  const music = document.getElementById('bg-music');
+  let playing = false;
+
+  audioDot.addEventListener('click', () => {
+    if (!playing) {
+      music.play();
+      audioDot.classList.add('playing');
+      playing = true;
+    } else {
+      music.pause();
+      audioDot.classList.remove('playing');
+      playing = false;
+    }
   });
-</script>
+
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('draggable', 'false');
+    img.style.userSelect = 'none';
+    img.addEventListener('mousedown', e => e.preventDefault());
+    
+    const overlay = document.createElement('div');
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.background = 'rgba(255,255,255,0.03)';
+    overlay.style.pointerEvents = 'none';
+    overlay.style.borderRadius = img.style.borderRadius || '0';
+    img.parentNode.style.position = 'relative';
+    img.parentNode.appendChild(overlay);
+  });
+  </script>
 
 </body>
 </html>
